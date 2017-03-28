@@ -4,6 +4,7 @@ Is a angular directive for toggle columms on a table:
 Getting started:
 
 Example:
+`
 <table class="registros" table-column-toggler-table> 
 <thead>
   <tr> 
@@ -29,3 +30,4 @@ Example:
   </tr>
 </tbody>
 </table>
+</code>`
