@@ -35,13 +35,13 @@ angular.module('cmoro.tableColumnToggler', [])
             $scope.tableTHeads =[]; 
             $scope.tableTHeadsElements = $scope.tableTTable.find('th'); 
             angular.forEach($scope.tableTHeadsElements, function(elem,index){
-                if($(elem).attr('ignore')=="") return;
+                var ignore = $(elem).attr('ignore')=="";
                 var hide = false;
                 if($(elem).attr('hide')==""){
                     hide = true;
                     $(elem).addClass('ng-hide');
                 }
-                $scope.tableTHeads.push({'label':$(elem).text(), 'hide':hide});
+                $scope.tableTHeads.push({'label':$(elem).text(), 'hide':hide, 'ignore': ignore});
             }); 
         }   
     };
@@ -62,7 +62,7 @@ angular.module('cmoro.tableColumnToggler', [])
         controller: 'tableColumnController',
         link: function ($scope, element, attrs) {
              var wt = $scope.$watch('tableHeads', function(newValue, oldValue) { 
-                var tpl = '<div class="dropdown table-column-toggler-control"><button class="btn-group" data-toggle="dropdown">Editar Campos <span class="caret"></span></button> <ul class="dropdown-menu"><div ng-repeat="hd in tableTHeads"><input type="checkbox" ng-click="tableTRefresh()" ng-model="hd.hide" ng-true-value="false" ng-false-value="true">{{hd.label}}</div><ul></div>'; 
+                var tpl = '<div class="dropdown table-column-toggler-control"><button class="btn btn-group" data-toggle="dropdown">Editar Campos <span class="caret"></span></button> <ul class="dropdown-menu"><div ng-repeat="hd in tableTHeads" ng-hide="hd.ignore"><input type="checkbox" ng-click="tableTRefresh()" ng-model="hd.hide" ng-true-value="false" ng-false-value="true">{{hd.label}}</div><ul></div>'; 
                 var compHtml = $compile(tpl)($scope);
                 $(element).html(compHtml);     
                 wt();
