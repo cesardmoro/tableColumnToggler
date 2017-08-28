@@ -34,4 +34,3 @@ Example:
 </table>
 </code>
 ```
-ignore works only for lasts columns. 
